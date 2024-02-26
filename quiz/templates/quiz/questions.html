@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-wrapper">
+    <main class="form-signin m-auto fw-light">
+
+        <div class="text-block text-start">
+             <h2>Absolut POS Demo</h2>
+        </div>
+
+<form method="post" action="" class="my-form">
+    {% csrf_token %}
+    <div class="error mt-3 mb-3 text-danger">
+        {{ form.non_field_errors }}
+    </div>
+    {% for field in form.visible_fields %}
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group form-field">
+                    <label for="{{ field.id_for_label }}" class="custom-label-style fs-5">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+                <div class="error mt-2 text-danger text-start">
+                    {{ field.errors }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="row">
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </div>
+    </div>
+</form>
+
+    </main>
+</div>
+
+
+{% endblock %}

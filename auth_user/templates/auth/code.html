@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-wrapper">
+    <main class="form-signin m-auto">
+
+        <div class="text-block text-start">
+             <h2>Absolut POS Demo</h2>
+        </div>
+        <div class="text-block text-start">
+            <h3 class="h3 mb-3 fw-normal">Добро пожаловать!</h3>
+            <p class="mt-3 mb-3 text-body-secondary">Введите код отправленный Вам на почту</p>
+        </div>
+
+        <form method="POST" action="">
+        {% csrf_token %}
+        <div class="form-floating">
+        {{ form.code }}
+        <label for="{{ form.code.id_for_label }}" class="form-label">{{ form.code.label }}</label>
+        </div>
+            {% if error_code %}
+            <p class="error mt-3 mb-3 text-danger"> {{ error_code }}</p>
+            {% endif %}
+        <button class="btn btn-primary w-100 py-2 mt-3" type="submit">Продолжить</button>
+        <p class="mt-3 mb-3 text-body-secondary">Нажимая кнопку "Продолжить", Вы подтверждаете свое согласие с условиями Пользовательского соглашения</p>
+        <a href="" class="btn btn-light w-100 py-2 mt-3" type="submit" onclick="submitForm()">Отправить повторно</a>
+        </form>
+ </main>
+</div>
+<script>
+    function submitForm() {
+        // Отправляем POST-запрос на ваш сервер
+        fetch('retry', {
+            method: 'GET',
+        })
+        .then(response => {
+            // Обрабатываем ответ от сервера
+            if (response.ok) {
+                console.log('Задача в Celery запущена успешно');
+            } else {
+                console.error('Ошибка при запуске задачи в Celery');
+            }
+        })
+        .catch(error => {
+            console.error('Произошла ошибка', error);
+        });
+    }
+</script>
+{% endblock %}

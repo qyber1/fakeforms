@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-wrapper fw-light">
+    <main class="form-signin m-auto">
+
+        <div class="text-block text-start">
+             <h2>Absolut POS Demo</h2>
+        </div>
+        <div class="text-block text-start">
+            <p class="mt-3 mb-3 text-body fs-4">Выберите сферу Вашего бизнеса?</p>
+        </div>
+
+<form method="POST" action="" class="container">
+    {% csrf_token %}
+    <div class="row justify-content-center">
+        {% for field in form.visible_fields %}
+            <div class="col-12 mb-2">
+                <div class="form-check">
+                    {{ field }}
+                    <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.choice_label }}</label>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% if error_code %}
+        <p class="error mt-3 mb-3 text-danger"> {{ error_code }}</p>
+    {% endif %}
+    <button class="btn btn-primary w-100 py-2 mt-3 btn-submit" type="submit">Продолжить</button>
+</form>
+
+    </main>
+</div>
+
+
+{% endblock %}

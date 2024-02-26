@@ -1,0 +1,20 @@
+    .container-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    .form-signin {
+        max-width: 400px; /* устанавливайте нужную вам ширину */
+        width: 100%;
+    }
+
+    .text-block {
+        margin-bottom: 30px; /* Уменьшено расстояние между текстом и формой */
+    }
+
+        .error ul {
+        list-style-type:none;
+    }
